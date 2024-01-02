@@ -1,31 +1,18 @@
-import { StyleSheet } from 'react-native';
+import { View, Text } from 'react-native'
+import React from 'react'
+import { Link } from 'expo-router'
 
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
-
-export default function TabOneScreen() {
+const MainPage = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+    <View>
+      <Text>main page</Text>
+      <Link href={'/(modals)/login'}>login</Link>
+      <Link href={'/stay/listing'}>stay listing</Link>
+      <Link href={'/stay/123/'}>stay detail page</Link>
+      <Link href={'/stay/123/rooms'}>detail room</Link>
+      <Link href={'/(search)/search'}>search</Link>
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+export default MainPage
