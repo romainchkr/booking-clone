@@ -24,17 +24,22 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "search",
+          title: "Search",
           headerTitle: "Booking.com",
           headerTitleStyle: {
             fontSize: 20,
             fontFamily: 'mon-b',
-            color: "white"
+            color: Colors.white
           },
+          headerShadowVisible: false,
           headerStyle: {
+            height: 100,
             backgroundColor: Colors.primary,
           },
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+          headerRight: () => (
+            <FontAwesome name="bell-o" size={24} color={Colors.white} style={{marginRight: 24}} />
+          ),
         }}
       ></Tabs.Screen>
 
@@ -42,15 +47,30 @@ export default function TabLayout() {
         name="saved"
         options={{
           title: "Saved",
-          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />, headerTitleStyle: {
+            color: Colors.white,
+            fontFamily: 'mon-sb',
+          },
+          headerStyle: {
+            backgroundColor: Colors.primary,
+            height: 100,
+          },
         }}
       ></Tabs.Screen>
 
       <Tabs.Screen
         name="bookings"
         options={{
-          title: "bookings",
+          title: "Bookings",
           headerTitle: "Trips",
+          headerTitleStyle: {
+            color: Colors.white,
+            fontFamily: 'mon-sb',
+          },
+          headerStyle: {
+            backgroundColor: Colors.primary,
+            height: 100,
+          },
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="suitcase" color={color} />
           ),
@@ -60,41 +80,22 @@ export default function TabLayout() {
       <Tabs.Screen
         name="account"
         options={{
-          title: "account",
-          headerShown: false,
+          title: "Account",
+          headerTitle: "",
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: Colors.primary,
+            height: 100,
+          },
+          headerShadowVisible: false,
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="user" color={color} />
+            <TabBarIcon name="user-circle-o" color={color} />
+          ),
+          headerRight: () => (
+            <FontAwesome name="bell-o" size={24} color={Colors.white} style={{marginRight: 24}} />
           ),
         }}
       ></Tabs.Screen>
-      {/* <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      /> */}
     </Tabs>
   );
 }

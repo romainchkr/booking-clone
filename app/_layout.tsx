@@ -1,8 +1,9 @@
+import Colors from "@/constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export {
@@ -45,27 +46,51 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const router = useRouter();
-
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="stay/listing" options={{ headerTitle: "" }} />
-      <Stack.Screen name="stay/[id]/index" options={{ headerTitle: "Hotel xxx" }} />
-      <Stack.Screen name="stay/[id]/rooms" options={{ headerTitle: "Choose rooms" }} />
-      <Stack.Screen name="(modals)/login" options={{ presentation: "modal", title: "Log in or sign up" }} />
+    <BottomSheetModalProvider>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="stay/listing" options={{ headerTitle: "" }} />
+        <Stack.Screen
+          name="stay/[id]/index"
+          options={{ headerTitle: "Hotel xxx" }}
+        />
+        <Stack.Screen
+          name="stay/[id]/rooms"
+          options={{ headerTitle: "Choose rooms" }}
+        />
+        <Stack.Screen
+          name="(modals)/login"
+          options={{
+            presentation: "modal",
+            title: "Search",
+            headerTitle: "Booking.com",
+            headerTitleStyle: {
+              fontSize: 20,
+              fontFamily: 'mon-b',
+              color: Colors.white
+            },
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+          }}
+          // options={{ presentation: "modal", title: "Log in or sign up" }}
+        />
 
-      <Stack.Screen
-        name="(search)/search"
-        options={{
-          presentation: "transparentModal",
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => router.back()}>
-              <FontAwesome name="close" size={24} color="black" />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-    </Stack>
+        <Stack.Screen
+          name="(search)/search"
+          options={{
+            presentation: "transparentModal",
+            headerShown: false,
+            // headerLeft: () => (
+            //   <TouchableOpacity onPress={() => router.back()}>
+            //     <FontAwesome name="close" size={24} color="black" />
+            //   </TouchableOpacity>
+            // ),
+          }}
+        />
+      </Stack>
+    </BottomSheetModalProvider>
   );
 }
