@@ -1,23 +1,13 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Link } from 'expo-router'
 import Colors from '@/constants/Colors'
+import EmptySaved from '@/src/components/saved/EmptySaved'
 
 const SavedPage = () => {
   return (
     // View if not logged in or 0 booking saved
-    <View style={styles.container}>
-      <Image source={require('@/assets/images/bookings_empty_cancelled.png')} style={styles.image}/>
-      <Text style={styles.title}>Save what you like for later</Text>
-      <Text style={styles.text}>Create lists of yout favourite properties to help you share, compare and book</Text>
-      <Link href={'/(tabs)'} asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Start your search</Text>
-        </TouchableOpacity>
-      </Link>
-      <Link href={'/(modals)/login'} style={styles.link}>Create a list</Link>
-    </View>
+    <EmptySaved />
+    
   )
 }
 

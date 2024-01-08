@@ -1,10 +1,16 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams, useNavigation } from 'expo-router'
 
-const StayPage = () => {
+const StayDetailPage = () => {
+  const navigation = useNavigation();
   const {id} = useLocalSearchParams<{id: string}>();
-  console.log("id from index: ", id);
+  // console.log("id from index: ", id);
+
+  React.useEffect(() => {
+    navigation.setOptions({ headerTitle: `Hotel id ${id}` });
+  }, [navigation]);
+  
   return (
     <View>
       <Text>StayPage</Text>
@@ -12,4 +18,4 @@ const StayPage = () => {
   )
 }
 
-export default StayPage
+export default StayDetailPage

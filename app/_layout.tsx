@@ -46,11 +46,19 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const router = useRouter();
   return (
     <BottomSheetModalProvider>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="stay/listing" options={{ headerTitle: "" }} />
+        <Stack.Screen name="stay/listing" options={{
+          headerTitle: "",
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: Colors.primary,
+          },
+          headerBackVisible: false,
+        }} />
         <Stack.Screen
           name="stay/[id]/index"
           options={{ headerTitle: "Hotel xxx" }}
@@ -60,9 +68,9 @@ function RootLayoutNav() {
           options={{ headerTitle: "Choose rooms" }}
         />
         <Stack.Screen
-          name="(modals)/login"
+          name="login"
           options={{
-            presentation: "modal",
+            presentation: "transparentModal",
             title: "Search",
             headerTitle: "Booking.com",
             headerTitleStyle: {
@@ -74,6 +82,11 @@ function RootLayoutNav() {
             headerStyle: {
               backgroundColor: Colors.primary,
             },
+            headerLeft: () => (
+              <TouchableOpacity onPress={router.back}>
+                <FontAwesome name="close" size={24} color={Colors.white} />
+              </TouchableOpacity>
+            )
           }}
           // options={{ presentation: "modal", title: "Log in or sign up" }}
         />
@@ -83,11 +96,6 @@ function RootLayoutNav() {
           options={{
             presentation: "transparentModal",
             headerShown: false,
-            // headerLeft: () => (
-            //   <TouchableOpacity onPress={() => router.back()}>
-            //     <FontAwesome name="close" size={24} color="black" />
-            //   </TouchableOpacity>
-            // ),
           }}
         />
       </Stack>

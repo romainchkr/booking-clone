@@ -5,7 +5,7 @@ const MoreForYou = () => {
   return (
     <View>
       <Text style={styles.title}>More for you</Text>
-      <View style={{height: 200}}></View>
+      {/* <View style={{height: 200}}></View> */}
     </View>
   )
 }

@@ -54,6 +54,7 @@ const SearchPage = () => {
           value={searchInput}
           onChangeText={(text) => setSearchInput(text)}
           placeholder="Enter destination"
+          placeholderTextColor={Colors.grey}
           autoFocus
           style={{ flexGrow: 1 }}
         />

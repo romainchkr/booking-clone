@@ -15,7 +15,7 @@ const LoginPage = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white, }}>
       <View style={styles.container}>
         <Text style={styles.title}>
           Sign in for easier access to your trip details

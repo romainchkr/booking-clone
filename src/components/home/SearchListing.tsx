@@ -16,7 +16,7 @@ const SearchListing = ({data : items, searchInput} : Props) => {
     router.push({
       pathname: "/",
       params: {
-        placeName: item.name,
+        placeName: `${item.name}, ${item.country}`,
         placeId: item.id,
       },
     });
