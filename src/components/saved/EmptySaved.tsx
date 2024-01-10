@@ -14,7 +14,7 @@ const EmptySaved = () => {
           <Text style={styles.buttonText}>Start your search</Text>
         </TouchableOpacity>
       </Link>
-      <Link href={'/login'} style={styles.link}>Create a list</Link>
+      <Link href={'/(auth)/login'} style={styles.link}>Create a list</Link>
     </View>
   )
 }

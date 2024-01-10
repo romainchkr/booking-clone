@@ -14,7 +14,7 @@ const SignInPromo = () => {
             membership
           </Text>
         </View>
-        <Link href={"/login"} style={styles.button} asChild>
+        <Link href={"/(auth)/login"} style={styles.button} asChild>
           <TouchableOpacity>
             <Text style={styles.buttonText}>Sign In</Text>
           </TouchableOpacity>

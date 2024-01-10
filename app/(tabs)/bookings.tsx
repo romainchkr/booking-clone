@@ -41,7 +41,7 @@ const BookingsPage = () => {
         <Image source={bookingStatus[activeIndex].image} style={styles.image}/>
         <Text style={styles.title}>{bookingStatus[activeIndex].textIfEmpty}</Text>
         <Text style={styles.text}>Sign in or create an account to get started</Text>
-        <Link href="/login" asChild>
+        <Link href="/(auth)/login" asChild>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Sign In</Text>
           </TouchableOpacity>

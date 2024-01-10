@@ -51,14 +51,17 @@ function RootLayoutNav() {
     <BottomSheetModalProvider>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="stay/listing" options={{
-          headerTitle: "",
-          headerShadowVisible: false,
-          headerStyle: {
-            backgroundColor: Colors.primary,
-          },
-          headerBackVisible: false,
-        }} />
+        <Stack.Screen
+          name="stay/listing"
+          options={{
+            headerTitle: "",
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerBackVisible: false,
+          }}
+        />
         <Stack.Screen
           name="stay/[id]/index"
           options={{ headerTitle: "Hotel xxx" }}
@@ -68,15 +71,15 @@ function RootLayoutNav() {
           options={{ headerTitle: "Choose rooms" }}
         />
         <Stack.Screen
-          name="login"
+          name="(auth)/login"
           options={{
-            presentation: "transparentModal",
+            // presentation: "transparentModal",
             title: "Search",
             headerTitle: "Booking.com",
             headerTitleStyle: {
               fontSize: 20,
-              fontFamily: 'mon-b',
-              color: Colors.white
+              fontFamily: "mon-b",
+              color: Colors.white,
             },
             headerShadowVisible: false,
             headerStyle: {
@@ -86,9 +89,36 @@ function RootLayoutNav() {
               <TouchableOpacity onPress={router.back}>
                 <FontAwesome name="close" size={24} color={Colors.white} />
               </TouchableOpacity>
-            )
+            ),
           }}
-          // options={{ presentation: "modal", title: "Log in or sign up" }}
+        />
+
+        <Stack.Screen
+          name="(auth)/email"
+          options={{
+            headerTitle: "",
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerBackButtonMenuEnabled: true,
+            headerBackTitle: "Back",
+            headerTintColor: Colors.white,
+          }}
+        />
+
+        <Stack.Screen
+          name="(auth)/emailSignUp"
+          options={{
+            headerTitle: "",
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.primary,
+            },
+            headerBackButtonMenuEnabled: true,
+            headerBackTitle: "Back",
+            headerTintColor: Colors.white,
+          }}
         />
 
         <Stack.Screen

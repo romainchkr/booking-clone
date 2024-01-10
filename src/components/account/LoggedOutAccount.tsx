@@ -13,7 +13,7 @@ const LoggedOutAccount = () => {
           <FontAwesome5 name="user-circle" size={30} color={Colors.white} />
         </View>
         <Text style={styles.text}>Sign in to manage your trips. You'll also unlock Genius discounts at great properties worldwide.</Text>
-        <Link href={'/login'} asChild>
+        <Link href={'/(auth)/login'} asChild>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Sign in</Text>
           </TouchableOpacity>

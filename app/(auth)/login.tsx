@@ -3,10 +3,16 @@ import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Colors from "@/constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-
+import { useRouter } from "expo-router";
 const LoginPage = () => {
-  const renderButton = (text: string, iconName: React.ComponentProps<typeof FontAwesome>["name"]) => (
-    <TouchableOpacity style={[styles.button, styles.buttonBorder]}>
+  const router = useRouter();
+  
+  const renderButton = (
+    text: string,
+    iconName: React.ComponentProps<typeof FontAwesome>["name"],
+    onClick: () => void
+  ) => (
+    <TouchableOpacity disabled={true} style={[styles.button, styles.buttonBorder, styles.buttonDisabled]} onPress={onClick}>
       <View style={styles.buttonContent}>
         <FontAwesome name={iconName} size={20} color={Colors.black} />
         <Text style={styles.buttonText}>{text}</Text>
@@ -15,17 +21,18 @@ const LoginPage = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white, }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
       <View style={styles.container}>
         <Text style={styles.title}>
           Sign in for easier access to your trip details
         </Text>
 
-        {renderButton("Continue with Google", "google")}
-        {renderButton("Continue with Apple", "apple")}
-        {renderButton("Continue with Facebook", "facebook")}
+        {renderButton("Continue with Google", "google", () => {})}
+        {renderButton("Continue with Apple", "apple", () => {})}
+        {renderButton("Continue with Facebook", "facebook", () => {})}
 
         <TouchableOpacity
+          onPress={() => router.push("/(auth)/email")}
           style={[styles.button, { backgroundColor: Colors.secondary }]}
         >
           <Text style={[styles.buttonText, { color: Colors.white }]}>
@@ -38,7 +45,7 @@ const LoginPage = () => {
         <Text style={styles.text}>
           By signin in or creating an account, you agree with our{" "}
           <Text style={{ color: Colors.secondary }}>Terms & conditions</Text>{" "}
-          and{" "}<Text style={{ color: Colors.secondary }}>Privacy statement</Text>
+          and <Text style={{ color: Colors.secondary }}>Privacy statement</Text>
         </Text>
         <Text style={styles.text}>2024 Booking.com & romainchkr</Text>
       </View>
@@ -71,6 +78,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+  },
+  buttonDisabled: {
+    backgroundColor: Colors.grey,
   },
   buttonText: {
     fontFamily: "mon-sb",
