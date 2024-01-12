@@ -3,8 +3,7 @@ import React from 'react'
 import { useLocalSearchParams } from 'expo-router';
 
 const RoomPage = () => {
-    const {id} = useLocalSearchParams<{id: string}>();
-    console.log("id from rooms: ", id);
+  const {id} = useLocalSearchParams<{id: string}>();
   return (
     <View>
       <Text>RoomPage</Text>

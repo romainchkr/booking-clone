@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import React from 'react'
-import Colors from '@/constants/Colors'
-import EmptySaved from '@/src/components/saved/EmptySaved'
+import Colors from '@/src/constants/colors.constants'
+import EmptySaved from '@/src/presentation/components/saved/EmptySaved'
 
 const SavedPage = () => {
   return (

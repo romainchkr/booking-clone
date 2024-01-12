@@ -1,10 +1,13 @@
-import Colors from "@/constants/Colors";
+import { store } from "@/src/application/state/store";
+import Colors from "@/src/constants/colors.constants";
+import { UseCasesProvider } from "@/src/domain/useCases/useCasesContext";
 import { FontAwesome } from "@expo/vector-icons";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Provider } from "react-redux";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -48,87 +51,91 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const router = useRouter();
   return (
-    <BottomSheetModalProvider>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="stay/listing"
-          options={{
-            headerTitle: "",
-            headerShadowVisible: false,
-            headerStyle: {
-              backgroundColor: Colors.primary,
-            },
-            headerBackVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="stay/[id]/index"
-          options={{ headerTitle: "Hotel xxx" }}
-        />
-        <Stack.Screen
-          name="stay/[id]/rooms"
-          options={{ headerTitle: "Choose rooms" }}
-        />
-        <Stack.Screen
-          name="(auth)/login"
-          options={{
-            // presentation: "transparentModal",
-            title: "Search",
-            headerTitle: "Booking.com",
-            headerTitleStyle: {
-              fontSize: 20,
-              fontFamily: "mon-b",
-              color: Colors.white,
-            },
-            headerShadowVisible: false,
-            headerStyle: {
-              backgroundColor: Colors.primary,
-            },
-            headerLeft: () => (
-              <TouchableOpacity onPress={router.back}>
-                <FontAwesome name="close" size={24} color={Colors.white} />
-              </TouchableOpacity>
-            ),
-          }}
-        />
+    <Provider store={store}>
+      <UseCasesProvider>
+        <BottomSheetModalProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="stay/listing"
+              options={{
+                headerTitle: "",
+                headerShadowVisible: false,
+                headerStyle: {
+                  backgroundColor: Colors.primary,
+                },
+                headerBackVisible: false,
+              }}
+            />
+            <Stack.Screen
+              name="stay/[id]/index"
+              options={{ headerTitle: "Hotel xxx" }}
+            />
+            <Stack.Screen
+              name="stay/[id]/rooms"
+              options={{ headerTitle: "Choose rooms" }}
+            />
+            <Stack.Screen
+              name="(auth)/login"
+              options={{
+                // presentation: "transparentModal",
+                title: "Search",
+                headerTitle: "Booking.com",
+                headerTitleStyle: {
+                  fontSize: 20,
+                  fontFamily: "mon-b",
+                  color: Colors.white,
+                },
+                headerShadowVisible: false,
+                headerStyle: {
+                  backgroundColor: Colors.primary,
+                },
+                headerLeft: () => (
+                  <TouchableOpacity onPress={router.back}>
+                    <FontAwesome name="close" size={24} color={Colors.white} />
+                  </TouchableOpacity>
+                ),
+              }}
+            />
 
-        <Stack.Screen
-          name="(auth)/email"
-          options={{
-            headerTitle: "",
-            headerShadowVisible: false,
-            headerStyle: {
-              backgroundColor: Colors.primary,
-            },
-            headerBackButtonMenuEnabled: true,
-            headerBackTitle: "Back",
-            headerTintColor: Colors.white,
-          }}
-        />
+            <Stack.Screen
+              name="(auth)/emailSignIn"
+              options={{
+                headerTitle: "",
+                headerShadowVisible: false,
+                headerStyle: {
+                  backgroundColor: Colors.primary,
+                },
+                headerBackButtonMenuEnabled: true,
+                headerBackTitle: "Back",
+                headerTintColor: Colors.white,
+              }}
+            />
 
-        <Stack.Screen
-          name="(auth)/emailSignUp"
-          options={{
-            headerTitle: "",
-            headerShadowVisible: false,
-            headerStyle: {
-              backgroundColor: Colors.primary,
-            },
-            headerBackButtonMenuEnabled: true,
-            headerBackTitle: "Back",
-            headerTintColor: Colors.white,
-          }}
-        />
+            <Stack.Screen
+              name="(auth)/emailSignUp"
+              options={{
+                headerTitle: "",
+                headerShadowVisible: false,
+                headerStyle: {
+                  backgroundColor: Colors.primary,
+                },
+                headerBackButtonMenuEnabled: true,
+                headerBackTitle: "Back",
+                headerTintColor: Colors.white,
+              }}
+            />
 
-        <Stack.Screen
-          name="(search)/search"
-          options={{
-            presentation: "transparentModal",
-            headerShown: false,
-          }}
-        />
-      </Stack>
-    </BottomSheetModalProvider>
+            <Stack.Screen
+              name="(search)/search"
+              options={{
+                presentation: "transparentModal",
+                headerShown: false,
+              }}
+            />
+          </Stack>
+        </BottomSheetModalProvider>
+      </UseCasesProvider>
+    </Provider>
   );
 }

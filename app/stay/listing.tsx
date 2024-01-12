@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet, FlatList, ListRenderItem } from 'react-native'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Stack, useLocalSearchParams } from 'expo-router';
-import Colors from '@/constants/Colors';
-import { ListingPlace } from '@/src/interfaces/listingPlace';
-import Place from '@/src/components/stay/Place';
-import ListingHeader from '@/src/components/stay/ListingHeader';
-import EmptyListing from '@/src/components/stay/EmptyListing';
+import Colors from '@/src/constants/colors.constants';
+import { ListingPlace } from '@/tmp-interfaces/listingPlace';
+import Place from '@/src/presentation/components/stay/Place';
+import ListingHeader from '@/src/presentation/components/stay/ListingHeader';
+import EmptyListing from '@/src/presentation/components/stay/EmptyListing';
 
 const data: ListingPlace[] = [
   {

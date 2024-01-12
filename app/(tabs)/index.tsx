@@ -1,31 +1,41 @@
 import { View, StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import HomeHeader from '@/src/components/home/HomeHeader'
+import HomeHeader from '@/src/presentation/components/home/HomeHeader'
 import { ScrollView } from 'react-native-gesture-handler'
-import Stays from '@/src/components/home/Stays'
-import Flights from '@/src/components/home/Flights'
-import SignInPromo from '@/src/components/home/SignInPromo'
-import MoreForYou from '@/src/components/home/MoreForYou'
-import { FIREBASE_AUTH } from '@/firebaseConfig'
+import Stays from '@/src/presentation/components/home/Stays'
+import Flights from '@/src/presentation/components/home/Flights'
+import SignInPromo from '@/src/presentation/components/home/SignInPromo'
+import MoreForYou from '@/src/presentation/components/home/MoreForYou'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { FirebaseAuthRepository } from '@/src/infrastructure/repositories/firebaseAuth.repository'
+import { fetchUserDetails } from '@/src/application/state/slices/user.slice'
+import { AppDispatch } from '@/src/application/state/store'
+import { authenticate } from '@/src/application/state/slices/auth.slice'
 
 const MainPage = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const authRepository = FirebaseAuthRepository.getInstance();
+  
   const [category, setCategory] = useState<string>('Stays');
   const onCategoryChanged = (category: string) => {
     setCategory(category);
   }
 
-  function onAuthStateChanged(user : any) {
-    if (user) {
-      console.log("user is logged in");
-    } else {
-      console.log("user is not logged in");
-    }
-  }
-
+  // Set up auth with firebase
+  // Only used to persist auth state
   useEffect(() => {
-    const sub = FIREBASE_AUTH.onAuthStateChanged(onAuthStateChanged);
-    return sub;
-  }, []);
+    const unsubscribe = authRepository.onAuthStateChanged(userId => {
+      if (userId) {
+        console.log("user is logged in && fetch user details");
+        dispatch(fetchUserDetails(userId));
+        dispatch(authenticate(userId));
+      } else {
+        console.log("user is not logged in");
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup on unmount
+  }, [dispatch, authRepository]);
 
   return (
     <View style={{flex: 1}}>

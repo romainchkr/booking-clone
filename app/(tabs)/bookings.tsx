@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler';
-import Colors from '@/constants/Colors';
+import Colors from '@/src/constants/colors.constants';
 import { Link } from 'expo-router';
 
 const bookingStatus = [

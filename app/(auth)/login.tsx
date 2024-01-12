@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Colors from "@/constants/Colors";
+import Colors from "@/src/constants/colors.constants";
 import { FontAwesome } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 const LoginPage = () => {
@@ -32,7 +32,7 @@ const LoginPage = () => {
         {renderButton("Continue with Facebook", "facebook", () => {})}
 
         <TouchableOpacity
-          onPress={() => router.push("/(auth)/email")}
+          onPress={() => router.push("/(auth)/emailSignIn")}
           style={[styles.button, { backgroundColor: Colors.secondary }]}
         >
           <Text style={[styles.buttonText, { color: Colors.white }]}>

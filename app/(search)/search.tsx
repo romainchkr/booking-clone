@@ -1,11 +1,11 @@
-import { View, TouchableOpacity, Text, StyleSheet, SafeAreaView } from 'react-native'
+import { View, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native'
 import React, { useState } from 'react'
-import Colors from '@/constants/Colors'
+import Colors from '@/src/constants/colors.constants'
 import { useRouter } from 'expo-router'
 import { TextInput } from 'react-native-gesture-handler'
 import { FontAwesome } from '@expo/vector-icons'
-import SearchListing from '@/src/components/home/SearchListing'
-import { SearchPlace } from '@/src/interfaces/searchPlace'
+import SearchListing from '@/src/presentation/components/home/SearchListing'
+import { SearchPlace } from '@/tmp-interfaces/searchPlace'
 
 const data: SearchPlace[] = [
   {

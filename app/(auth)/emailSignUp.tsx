@@ -1,15 +1,16 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
-import Colors from "@/constants/Colors";
+import Colors from "@/src/constants/colors.constants";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { FIREBASE_AUTH, FIRESTORE_DB } from "@/firebaseConfig";
-import { UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/src/application/state/store";
+import { signUp } from "@/src/application/state/slices/auth.slice";
 
 const EmailSignUpPage = () => {
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
   const {email} = useLocalSearchParams<{email: string}>();
 
   const [password, setPassword] = useState<string>("");
@@ -17,10 +18,22 @@ const EmailSignUpPage = () => {
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] = useState(false);
 
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  
+  const loading = useSelector((state: RootState) => state.auth.loading);
+  const authState = useSelector((state: RootState) => state.auth);
 
-  const signUp: () => void = () => {
+  useEffect(() => {
+    if (authState.isAuthenticated && authState.userId) {
+      router.push('/(tabs)/account');
+    }
+
+    if (authState.error) {
+      setError(authState.error);
+    }
+  }, [authState, router]);
+
+  const handleSignUp: () => void = () => {
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -30,25 +43,7 @@ const EmailSignUpPage = () => {
       return;
     }
 
-    setLoading(true);
-    createUserWithEmailAndPassword(FIREBASE_AUTH, email, password)
-      .then((userCredential : UserCredential) => {
-        const user = userCredential.user;
-        console.log("user");
-        setDoc(doc(FIRESTORE_DB, "users", user.uid), {
-          uid: user.uid,
-          email: user.email,
-          name: user.displayName,
-          photo: user.photoURL,
-        });
-        router.push('/(tabs)/account');
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    dispatch(signUp({email, password}));
   };
 
   return (
@@ -89,7 +84,7 @@ const EmailSignUpPage = () => {
 
       <TouchableOpacity
         style={[styles.button, loading && styles.loadingButton]}
-        onPress={signUp}
+        onPress={handleSignUp}
       >
         {loading ? (
           <ActivityIndicator size="small" color={Colors.white} />

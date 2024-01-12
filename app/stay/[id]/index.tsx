@@ -5,7 +5,6 @@ import { useLocalSearchParams, useNavigation } from 'expo-router'
 const StayDetailPage = () => {
   const navigation = useNavigation();
   const {id} = useLocalSearchParams<{id: string}>();
-  // console.log("id from index: ", id);
 
   React.useEffect(() => {
     navigation.setOptions({ headerTitle: `Hotel id ${id}` });
